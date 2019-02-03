@@ -12,13 +12,12 @@ docker run --rm -it --name adams-develop -v "$(dirname "$(pwd)")":/adams -v "${H
 
 3. Build ADAMS inside container.
 ```bash
-cd adams-base
 mvn -T 2C package -DskipTests=true
 ```
 
 4.1. Run ADAMS.
 ```bash
-java -cp ./adams-core/target/adams-core-19.2.0-jar-with-dependencies.jar -adams.gui.Main
+java -cp ./adams-core/target/adams-core-19.2.0-jar-with-dependencies.jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:5005 adams.gui.Main
 ```
 
 4.2. Or alternatively run fully packaged ADAMS.
