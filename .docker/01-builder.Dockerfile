@@ -1,10 +1,10 @@
 FROM ubuntu
 
 # Install dependencies.
-RUN apt update && \
-    DEBIAN_FRONTEND=noninteractive  apt install -y \
+RUN sed -ie 's/archive.ubuntu.com/nz.archive.ubuntu.com/g' /etc/apt/sources.list && \
+    apt update && \
+    DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
         curl \
-        git \
         imagemagick \
         libxrender1 \
         libxi6 \
@@ -46,5 +46,7 @@ RUN groupadd -g $GID adams && \
 RUN mkdir /adams && chown adams:adams /adams
 
 USER adams
+
+RUN mkdir ~/.m2
 
 WORKDIR /adams
